@@ -49,9 +49,9 @@ profiles:
   #   url: https://orcid.org/
 
 interests:
-  - Data Analytics
+  - Data Engineering
   - Computer Vision
-  - Natural Lamguage Processing
+  - NLP
   - Full Stack Machine Learning
 
 education:
