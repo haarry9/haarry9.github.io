@@ -9,7 +9,7 @@ design:
   spacing: "6rem"
 
 sections:
-  - block: resume-biography-3
+  - block: resume-biography-3 # to show intrest and education change to resume-biography-3
     content:
       # Choose a user profile to display (a folder name within `content/authors/`)
       username: admin
@@ -24,31 +24,36 @@ sections:
         color: black
         image:
           # Add your image background to `assets/media/`.
-          filename: stacked-peaks.svg
+          filename: higgsfield.jpg
           filters:
-            brightness: 1.0
+            brightness: 0.3
           size: cover
           position: center
           parallax: false
-  # - block: cta-card
+  # - block: resume-skills
   #   content:
-  #     title: '📚 My Mission'
-  #     subtitle: ''
-  #     text: |-
-  #       Use this area to speak to your mission. I'm a research scientist in the Moonshot team at DeepMind. I blog about machine learning, deep learning, and moonshots.
+  #     title: Skills & Hobbies
+  #     # Note: `username` refers to the user's folder name in `content/authors/`
+  #     username: admin
+  - block: markdown
+    content:
+      title: '📚 My Mission'
+      subtitle: ''
+      text: |-
+        Use this area to speak to your mission. I'm a research scientist in the Moonshot team at DeepMind. I blog about machine learning, deep learning, and moonshots.
 
-  #       I apply a range of qualitative and quantitative methods to comprehensively investigate the role of science and technology in the economy.
+        I apply a range of qualitative and quantitative methods to comprehensively investigate the role of science and technology in the economy.
         
-  #       Please reach out to collaborate 😃
-  #     button:
-  #         text: Get Started
-  #         url: https://hugoblox.com/templates/
-  #   design:
-  #     columns: '1'
-  #     card:
-  #       # Card background color (CSS class)
-  #       css_class: "bg-primary-500"
-  #       css_style: ""
+        Please reach out to collaborate 😃
+      button:
+          text: Get Started
+          url: https://hugoblox.com/templates/
+    design:
+      columns: '1'
+      card:
+        # Card background color (CSS class)
+        css_class: "bg-primary-500"
+        css_style: ""
   - block: collection
     id: papers
     content:
@@ -113,7 +118,7 @@ sections:
       # Choose how many pages you would like to offset by
       offset: 0
       # Page order: descending (desc) or ascending (asc) date.
-      order: desc
+      order: desc 
     design:
       # Choose a layout view
       view: date-title-summary
