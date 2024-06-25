@@ -29,7 +29,7 @@ sections:
             brightness: 0.5
           size: cover
           position: center
-          parallax: false
+          parallax: true
   # - block: resume-skills
   #   content:
   #     title: Skills & Hobbies
