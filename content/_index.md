@@ -54,28 +54,15 @@ sections:
   #       # Card background color (CSS class)
   #       css_class: "bg-primary-500"
   #       css_style: ""
-  - block: cta-button-list
-    content:
-      # Need a custom icon?
-      # Add an SVG image to the `assets/media/icons/` folder and reference it in the `icon` field below
-      buttons:
-        - text: 👉 Read my latest blog on Data Preprocessing Techniques
-          # icon: academicons/arxiv
-          url: https://arxiv.org/abs/2304.01852
-        # - text: Watch my new YouTube video to achieve 20x productivity
-        #   icon: brands/youtube
-        #   url: https://youtube.com
-        - text: Connect with me on LinkedIn
-          icon: brands/linkedin
-          url: https://linkedin.com
+
   - block: collection
-    id: papers
+    id: projects
     content:
-      title: Featured Projects
+      title: Projects
       filters:
         folders:
-          - publication
-        featured_only: true
+          - project
+        featured_only: false
     design:
       view: article-grid
       columns: 2
@@ -135,22 +122,37 @@ sections:
       order: desc 
     design:
       # Choose a layout view
-      view: date-title-summary
+      view: date-title-summary-image
       # Reduce spacing
       spacing:
-        padding: [0, 0, 0, 0]
-  - block: cta-card
-    demo: false # Only display this section in the Hugo Blox Builder demo site
+        padding: ['20px', '0', '20px', '0']
+  # - block: cta-card
+  #   demo: false # Only display this section in the Hugo Blox Builder demo site
+  #   content:
+  #     title: 👉 Get In Touch
+  #     text: |-
+  #       I'm available to collaborate on data science & machine learning projects, so feel free to contact me. If you have a question or want to say hello, I'll do my best to reply as quickly as possible.
+  #     button:
+  #       text: Say Hello
+  #       url: 'mailto:hspv99@gmail.com'
+  #   # design:
+  #   #   card:
+  #   #     # Card background color (CSS class)
+  #   #     css_class: "bg-primary-700"
+  #   #     css_style: ""
+  - block: cta-button-list
     content:
+      # Need a custom icon?
+      # Add an SVG image to the `assets/media/icons/` folder and reference it in the `icon` field below
       title: 👉 Get In Touch
       text: |-
         I'm available to collaborate on data science & machine learning projects, so feel free to contact me. If you have a question or want to say hello, I'll do my best to reply as quickly as possible.
-      button:
-        text: Say Hello
-        url: 'mailto:hspv99@gmail.com'
-    design:
-      card:
-        # Card background color (CSS class)
-        css_class: "bg-primary-700"
-        css_style: ""
+      buttons:
+        # - text: Watch my new YouTube video to achieve 20x productivity
+        #   icon: brands/youtube
+        #   url: https://youtube.com
+        - text: Connect with me on LinkedIn
+          icon: brands/linkedin
+          url: https://linkedin.com
+      
 ---

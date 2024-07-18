@@ -51,9 +51,9 @@ profiles:
 
 interests:
   - Data Science
+  - Machine Learning
   - NLP
   - LLM
-  - Full Stack Machine Learning
 
 education:
   # - area: PhD Artificial Intelligence
