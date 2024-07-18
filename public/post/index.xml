@@ -13,6 +13,318 @@
     </image>
     
     <item>
+      <title>Data Preprocessing Techniques</title>
+      <link>http://localhost:1313/post/data_preprocessing/</link>
+      <pubDate>Thu, 18 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/data_preprocessing/</guid>
+      <description>
+
+
+&lt;details class=&#34;print:hidden xl:hidden&#34; open&gt;
+  &lt;summary&gt;Table of Contents&lt;/summary&gt;
+  &lt;div class=&#34;text-sm&#34;&gt;
+  &lt;nav id=&#34;TableOfContents&#34;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&#34;#introduction&#34;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#sklearn-api&#34;&gt;SKlearn API&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#sklearn-transformers&#34;&gt;Sklearn Transformers&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#1-data-cleaning&#34;&gt;1. Data Cleaning&lt;/a&gt;
+      &lt;ul&gt;
+        &lt;li&gt;&lt;a href=&#34;#11-handling-missing-values&#34;&gt;1.1. Handling Missing Values&lt;/a&gt;&lt;/li&gt;
+        &lt;li&gt;&lt;a href=&#34;#12--numeric-transformers&#34;&gt;1.2  Numeric Transformers&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;
+  &lt;/div&gt;
+&lt;/details&gt;
+
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;The real world training data is usually not clean and has many issues such as &lt;strong&gt;missing values&lt;/strong&gt; for certain features, features on &lt;strong&gt;different scales, non-numeric attributes&lt;/strong&gt; etc. Thus, there is a need to &lt;strong&gt;pre-process&lt;/strong&gt; the data to make it amenable for training the machine learning model.&lt;/p&gt;
+&lt;p&gt;Some of the typical problems that require pre-processing are:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Missing values&lt;/strong&gt; in features&lt;/li&gt;
+&lt;li&gt;Numerical features are &lt;strong&gt;not on&lt;/strong&gt; the &lt;strong&gt;same scale&lt;/strong&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Categorical attributes&lt;/strong&gt; need to be represented with sensible numerical representation.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Too many features&lt;/strong&gt;, reduce the number of features.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Extract features&lt;/strong&gt; from non-numeric data.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;sklearn-api&#34;&gt;SKlearn API&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;mark&gt;Sklearn&lt;/mark&gt; provides a rich set of transformers for data pre-processing.&lt;/li&gt;
+&lt;li&gt;Sklearn provides &lt;mark&gt;pipeline&lt;/mark&gt; to chain multiple transforms together and apply them uniformly &lt;em&gt;&lt;strong&gt;across train, eval and test sets&lt;/strong&gt;&lt;/em&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;flex px-4 py-3 mb-6 rounded-md bg-primary-100 dark:bg-primary-900&#34;&gt;
+&lt;span class=&#34;pr-3 pt-1 text-primary-600 dark:text-primary-300&#34;&gt;
+  &lt;svg height=&#34;24&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; viewBox=&#34;0 0 24 24&#34;&gt;&lt;path fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; stroke-width=&#34;1.5&#34; d=&#34;m11.25 11.25l.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0m-9-3.75h.008v.008H12z&#34;/&gt;&lt;/svg&gt;
+&lt;/span&gt;
+  &lt;span class=&#34;dark:text-neutral-300&#34;&gt;The same pre-processing technique should be applied to both the training and test set.&lt;/span&gt;
+&lt;/div&gt;
+&lt;h3 id=&#34;sklearn-transformers&#34;&gt;Sklearn Transformers&lt;/h3&gt;
+&lt;p&gt;Sklearn provide the following &lt;em&gt;&lt;strong&gt;library of transformers&lt;/strong&gt;&lt;/em&gt; for &lt;strong&gt;data preprocessing&lt;/strong&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Feature Extraction(&lt;code&gt;sklearn.feature_extraction&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Data Cleaning(&lt;code&gt;sklearn.preprocessing&lt;/code&gt;) such as &lt;strong&gt;standardization, missing value imputation, feature scaling&lt;/strong&gt; etc.&lt;/li&gt;
+&lt;li&gt;Feature Reduction(&lt;code&gt;sklearn.decomposition.pca&lt;/code&gt;)&lt;/li&gt;
+&lt;li&gt;Feature Expansion(&lt;code&gt;sklearn.kernel_approximation&lt;/code&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;transformer-methods&#34;&gt;Transformer methods&lt;/h4&gt;
+&lt;p&gt;Each transformer has the following methods:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;fit()&lt;/code&gt; method learns model parameters from a training set.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;transform()&lt;/code&gt; method applies the learnt trasformation to the new data.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;fit_transform()&lt;/code&gt; performs the function of both &lt;code&gt;fit()&lt;/code&gt; and &lt;code&gt;transform()&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;1-data-cleaning&#34;&gt;1. Data Cleaning&lt;/h2&gt;
+&lt;h3 id=&#34;11-handling-missing-values&#34;&gt;1.1. Handling Missing Values&lt;/h3&gt;
+&lt;p&gt;Missing values occur due to errors in data capture such as senosr malfunctioning, measurement errors etc.&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;&lt;code&gt;sklearn.impute&lt;/code&gt;&lt;/mark&gt; API provides functionality to fill missing values and contains classes: &lt;mark&gt;SimpleImputer&lt;/mark&gt; and &lt;mark&gt;KNNImputer&lt;/mark&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;mark&gt;MissingIndicator&lt;/mark&gt;  provides indicators for missing values.&lt;/p&gt;
+&lt;h4 id=&#34;111-simpleimputer&#34;&gt;1.1.1. SimpleImputer&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Fills &lt;strong&gt;missing values&lt;/strong&gt; with one of the following strategies:
+&amp;lsquo;mean&amp;rsquo;, &amp;lsquo;median&amp;rsquo;, &amp;lsquo;most_frequent&amp;rsquo;, and &amp;lsquo;constant&amp;rsquo;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Example usage:
+Consider original feature matrix $\mathbf{X}$
+&lt;/p&gt;
+$$
+X = \begin{bmatrix}
+7 &amp; 1 \\
+nan &amp; 8 \\
+2 &amp; nan \\
+9 &amp; 6 \\
+\end{bmatrix}
+$$
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;from sklearn.impute import SimpleImputer
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;si = SimpleImputer(strategy =&amp;#39;mean&amp;#39;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;si.fit_transform(X)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&amp;rsquo;nan&amp;rsquo; in 1st column is filled by their mean, $(7+2+9)/3 = 6$.&lt;/li&gt;
+&lt;li&gt;&amp;rsquo;nan&amp;rsquo; in 2nd column is filled by their mean, $(1+8+6)/3 = 5$.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Transformed feature matrix $\mathbf{X}&#39;$
+&lt;/p&gt;
+$$
+X&#39; = \begin{bmatrix}
+7 &amp; 1 \\
+6 &amp; 8 \\
+2 &amp; 5 \\
+9 &amp; 6 \\
+\end{bmatrix}
+$$
+&lt;h4 id=&#34;112-knnimputer&#34;&gt;1.1.2. KNNImputer&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Uses &lt;strong&gt;k-nearest neighbors&lt;/strong&gt; approach to fill missing values in the dataset.
+&lt;ul&gt;
+&lt;li&gt;The missing value of an attribute in a specific example is filled with the &lt;strong&gt;mean&lt;/strong&gt; value of the same attribute of &lt;code&gt;n_neighbors&lt;/code&gt; &lt;strong&gt;closest neighbors&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;The nearest neighbors are decided based on &lt;strong&gt;Eucledian distance&lt;/strong&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Example usage:
+Consider original feature matrix $\mathbf{X}$
+&lt;/p&gt;
+$$
+X_{4 \times 3} = \begin{bmatrix}
+1 &amp; 2 &amp; nan\\
+3 &amp; 4 &amp; 3 \\
+nan &amp; 6 &amp; 5 \\
+8 &amp; 8  &amp; 7\\
+\end{bmatrix}
+$$
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;from sklearn.impute import KNNImputer
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;knni = KNNImputer(n_neighbours = 2, weights = &amp;#39;uniform&amp;#39;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;knni.fit_transform(X)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Transformed feature matrix $\mathbf{X}&#39;$
+&lt;/p&gt;
+$$
+X_{4 \times 3}&#39; = \begin{bmatrix}
+1 &amp; 2 &amp; 4\\
+3 &amp; 4 &amp; 3 \\
+5.5 &amp; 6 &amp; 5 \\
+8 &amp; 8  &amp; 7\\
+\end{bmatrix}
+$$
+&lt;h3 id=&#34;12--numeric-transformers&#34;&gt;1.2  Numeric Transformers&lt;/h3&gt;
+&lt;p&gt;There are three types of numeric transformers&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Feature scaling&lt;/li&gt;
+&lt;li&gt;Polynomial transformation&lt;/li&gt;
+&lt;li&gt;Discretization&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;121-feature-scaling&#34;&gt;1.2.1. Feature scaling&lt;/h4&gt;
+&lt;p&gt;Numeical features with different scales leads to slower convergence of iterative optimization procedures like gradient descent, mini batch gradient descent and stochastic gradient descent.
+Sklearn provides the following APIs for feature scaling:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;mark&gt;StandardScalar &lt;/mark&gt;&lt;/li&gt;
+&lt;li&gt;&lt;mark&gt;MaxAbsScalar &lt;/mark&gt;&lt;/li&gt;
+&lt;li&gt;&lt;mark&gt;MinMaxScalar &lt;/mark&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;StandardScalar&lt;/strong&gt;:
+Transforms the original feature vector $x$ into a new feature vector $x&#39;$ using the formula
+&lt;/p&gt;
+$$
+x&#39; = \frac{x - \mu}{\sigma}
+$$
+&lt;p&gt;Example usage:
+Consider original feature matrix $\mathbf{X}$
+&lt;/p&gt;
+$$
+X_{5 \times } = \begin{bmatrix}
+4 \\
+3 \\
+2 \\
+5 \\
+6 \\
+\end{bmatrix}
+\text{and} \quad \mu = 4, \sigma = \sqrt 2
+$$
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;from sklearn.preprocessing import StandardScaler
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ss = StandardScaler()
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;ss.fit_transform(X)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Transformed feature matrix $\mathbf{X}&#39;$
+&lt;/p&gt;
+$$
+X_{5 \times 1}&#39; = \begin{bmatrix}
+0 \\
+\frac{-1}{\sqrt 2}\\
+\frac{-2}{\sqrt 2}\\
+\frac{1}{\sqrt 2}\\
+\frac{2}{\sqrt 2}\\
+\end{bmatrix} 
+\text{and} \quad \mu&#39; =0 , \sigma&#39; = 1
+$$
+&lt;div class=&#34;flex px-4 py-3 mb-6 rounded-md bg-primary-100 dark:bg-primary-900&#34;&gt;
+&lt;span class=&#34;pr-3 pt-1 text-primary-600 dark:text-primary-300&#34;&gt;
+  &lt;svg height=&#34;24&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; viewBox=&#34;0 0 24 24&#34;&gt;&lt;path fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; stroke-width=&#34;1.5&#34; d=&#34;m11.25 11.25l.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0m-9-3.75h.008v.008H12z&#34;/&gt;&lt;/svg&gt;
+&lt;/span&gt;
+  &lt;span class=&#34;dark:text-neutral-300&#34;&gt;Note that the transformed feature vector $x&#39;$ has $\mu&#39; =0 , \sigma&#39; = 1$.&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;MinMaxScalar&lt;/strong&gt;: Transformes the original feature vector $x$ into new feature vector $x&#39;$ so that all values fall within the range $[0,1]$.
+&lt;/p&gt;
+$$
+x&#39; = \frac{x - x.min}{x.max - x.min}
+$$
+&lt;p&gt;
+where $x.min$ and $x.max$ are smallest and largest values of that feature respectively, of the original feature vector $x$.
+Example usage:
+Consider original feature matrix $\mathbf{X}$
+&lt;/p&gt;
+$$
+X_{5 \times 1} = \begin{bmatrix}
+15 \\
+2 \\
+5 \\
+-1 \\
+-5 \\
+\end{bmatrix}
+x.max = 15, x.min = -5
+$$
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;from sklearn.preprocessing import MinMaxScalar
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mms = MinMaxScalar()
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mms.fit_transform(X)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Transformed feature matrix $\mathbf{X}&#39;$
+&lt;/p&gt;
+$$
+X_{5 \times 1}&#39; = \begin{bmatrix}
+1 \\
+0.35 \\
+0.5 \\
+0.6 \\
+0 \\
+\end{bmatrix} 
+$$
+&lt;div class=&#34;flex px-4 py-3 mb-6 rounded-md bg-primary-100 dark:bg-primary-900&#34;&gt;
+&lt;span class=&#34;pr-3 pt-1 text-primary-600 dark:text-primary-300&#34;&gt;
+  &lt;svg height=&#34;24&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; viewBox=&#34;0 0 24 24&#34;&gt;&lt;path fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; stroke-width=&#34;1.5&#34; d=&#34;m11.25 11.25l.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0m-9-3.75h.008v.008H12z&#34;/&gt;&lt;/svg&gt;
+&lt;/span&gt;
+  &lt;span class=&#34;dark:text-neutral-300&#34;&gt;Note that the largest number is transformed to 1 and the smallest number to 0.&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;MaxAbsScalar&lt;/strong&gt;: Transformes the original feature vector $x$ into new feature vector $x&#39;$ so that all values fall within the range $[-1,1]$.
+&lt;/p&gt;
+$$
+x&#39; = \frac{x}{max(x.max,|x.min|)} \\
+\text{where, } max(x.max,|x.min|) \text{ is the max absolute value.}
+$$
+&lt;p&gt;Example usage:
+Consider original feature matrix $\mathbf{X}$
+&lt;/p&gt;
+$$
+X_{5 \times 1} = \begin{bmatrix}
+4 \\
+2 \\
+5 \\
+-1 \\
+-100 \\
+\end{bmatrix} \\
+\text{MaxAbsoluteValue} = max(5, |-100|) = 100
+$$
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;from sklearn.preprocessing import MaxAbsoluteScalar
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mas = MaxAbsoluteScalar()
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mas.fit_transform(X)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Transformed feature matrix $\mathbf{X}&#39;$
+&lt;/p&gt;
+$$
+X_{5 \times 1}&#39; = \begin{bmatrix}
+0.04 \\
+0.02 \\
+0.05 \\
+-0.01 \\
+-1 \\
+\end{bmatrix} 
+$$
+&lt;h4 id=&#34;122-polynomial-transformation&#34;&gt;1.2.2. Polynomial Transformation&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Polynomial transformation helps us learn non-linear relationships b/n features and labels.&lt;/li&gt;
+&lt;li&gt;Polynomial transformation generates a new feature matrix cosisting of all polynomial combinations of the features with degree less than or equal to the specified degree.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;123-discretization&#34;&gt;1.2.3. Discretization&lt;/h4&gt;
+&lt;p&gt;&lt;mark&gt;KBinsDiscretizer&lt;/mark&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Divides a continuous variable into bins.&lt;/li&gt;
+&lt;li&gt;One hot encoding or ordinal encoding is further applied to the bin labels.&lt;/li&gt;
+&lt;/ul&gt;
+$$
+X_{9 \times 1} = \begin{bmatrix}
+0 \\
+0.125 \\
+0.25 \\
+0.375 \\
+0.5 \\
+0.675 \\
+0.75 \\
+0.875 \\
+1.0 \\
+\end{bmatrix} 
+$$
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;XBinsDiscretizer(
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    n_bins=5,
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    strategy=&amp;#39;uniform&amp;#39;,
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    encode = &amp;#39;ordinal&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The entire range is split into 5 different parts or bins.
+&lt;/p&gt;
+$$
+X_{9 \times 1}&#39; = \begin{bmatrix}
+0 \\
+0 \\
+1 \\
+1 \\
+2 \\
+3 \\
+3 \\
+4 \\
+4 \\
+\end{bmatrix} 
+$$
+</description>
+    </item>
+    
+    <item>
       <title>Title of the Blog</title>
       <link>http://localhost:1313/post/template/</link>
       <pubDate>Thu, 18 Jul 2024 00:00:00 +0000</pubDate>
