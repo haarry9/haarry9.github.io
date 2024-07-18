@@ -9,14 +9,14 @@ design:
   spacing: "6rem"
 
 sections:
-  - block: resume-biography-3 # to show intrest and education change to resume-biography-3
+  - block: resume-biography # to show intrest and education change to resume-biography-3
     content:
       # Choose a user profile to display (a folder name within `content/authors/`)
       username: admin
       text: ""
       # Show a call-to-action button under your biography? (optional)
       button:
-        text: Download CV
+        text: Download Resume
         url: uploads/resume.pdf
     design:
       css_class: dark
@@ -24,9 +24,9 @@ sections:
         color: black
         image:
           # Add your image background to `assets/media/`.
-          filename: higgsfield.jpg
+          filename: new_bg.png
           filters:
-            brightness: 0.5
+            brightness: 0.6
           size: cover
           position: center
           parallax: true
@@ -40,10 +40,10 @@ sections:
       title: '📚 My Mission'
       subtitle: ''
       text: |-
-        Use this area to speak to your mission. I'm a research scientist in the Moonshot team at DeepMind. I blog about machine learning, deep learning, and moonshots.
+        I'm a computer science engineer with a passion for **data science** and **AI**. I am also an enthusiatic coder profient in **Python** and **SQL**. I blog about data science, machine learning, deep learning techniques and business cases.
 
-        I apply a range of qualitative and quantitative methods to comprehensively investigate the role of science and technology in the economy.
-        
+        I am dedicated to harnessing the power of data to uncover insights, drive innovation, and solve complex business problems. I apply a range of **data visualization** and **statistical analysis** techniques to interpret data, and use **machine learning algorithms** to extract meaningful patterns in data that can address business problems. I am committed to continuous learning and staying at the forefront of technological advancements to tackle real-world challenges.
+   
         Please reach out to collaborate 😃
       button:
           text: Get Started
@@ -54,6 +54,20 @@ sections:
         # Card background color (CSS class)
         css_class: "bg-primary-500"
         css_style: ""
+  - block: cta-button-list
+    content:
+      # Need a custom icon?
+      # Add an SVG image to the `assets/media/icons/` folder and reference it in the `icon` field below
+      buttons:
+        - text: 👉 Read my latest blog on Data Preprocessing Techniques
+          # icon: academicons/arxiv
+          url: https://arxiv.org/abs/2304.01852
+        # - text: Watch my new YouTube video to achieve 20x productivity
+        #   icon: brands/youtube
+        #   url: https://youtube.com
+        - text: Connect with me on LinkedIn
+          icon: brands/linkedin
+          url: https://linkedin.com
   - block: collection
     id: papers
     content:

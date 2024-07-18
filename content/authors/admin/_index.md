@@ -195,4 +195,6 @@ awards:
 
 <!-- Harishankar P V is an aspiring Data Scientist, interested in working on data analytics, computer vision, NLP and full-stack machine learning problems. Working with PyTorch, ML algorithms such as XGBoost, and constantly learning new technology. Outside work, he writes data-centric blog-posts and an leads an active lifestyle. -->
 
-Computer Science Engineer with a passion for Data and AI. I am excited about contributing to the development of responsible AI and being part of the transformative experience. Proficient in English(C1/C2 Level) and with experience in training cutting-edge LLM models. I am also ambitious and a continuous learner who is always determined for excellence.
+<!-- Computer Science Engineer with a passion for Data and AI. I am excited about contributing to the development of responsible AI and being part of the transformative experience. Proficient in English(C1/C2 Level) and with experience in training cutting-edge LLM models. I am also ambitious and a continuous learner who is always determined for excellence. -->
+
+👋 Hi, there! I'm **Harishankar**, an aspiring data scientist passionate about AI.
