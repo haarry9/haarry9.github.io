@@ -11,7 +11,8 @@ last_name: P V
 
 # Status emoji
 status:
-  icon: ☕️
+  # icon: ☕️
+  icon: 🍵
 
 # Is this the primary user of the site?
 superuser: true
@@ -49,9 +50,9 @@ profiles:
   #   url: https://orcid.org/
 
 interests:
-  - Data Engineering
-  - Computer Vision
+  - Data Science
   - NLP
+  - LLM
   - Full Stack Machine Learning
 
 education:
@@ -191,10 +192,15 @@ awards:
       Object-oriented programming (OOP) lets you specify relationships between functions and the objects that they can act on, helping you manage complexity in your code. This is an intermediate level course, providing an introduction to OOP, using the S3 and R6 systems. S3 is a great day-to-day R programming tool that simplifies some of the functions that you write. R6 is especially useful for industry-specific analyses, working with web APIs, and building GUIs.
 ---
 
-<!-- ## About Me -->
+## Hey, I’m Harishankar 👋
 
 <!-- Harishankar P V is an aspiring Data Scientist, interested in working on data analytics, computer vision, NLP and full-stack machine learning problems. Working with PyTorch, ML algorithms such as XGBoost, and constantly learning new technology. Outside work, he writes data-centric blog-posts and an leads an active lifestyle. -->
 
 <!-- Computer Science Engineer with a passion for Data and AI. I am excited about contributing to the development of responsible AI and being part of the transformative experience. Proficient in English(C1/C2 Level) and with experience in training cutting-edge LLM models. I am also ambitious and a continuous learner who is always determined for excellence. -->
 
-👋 Hi, there! I'm **Harishankar**, an aspiring data scientist passionate about AI.
+
+I'm a computer science engineer with a passion for **data science** and **AI**. I am also an enthusiatic coder profient in **Python** and **SQL**. I blog about data science, machine learning, deep learning techniques and business cases.
+
+I am dedicated to harnessing the power of data to uncover insights, drive innovation, and solve complex business problems. I apply a range of **data visualization** and **statistical analysis** techniques to interpret data, and use **machine learning algorithms** to extract meaningful patterns in data that can address business problems. I am committed to continuous learning and staying at the forefront of technological advancements to tackle real-world challenges.
+
+👨🏼‍💻 🍵 🏋️‍♂️ 🏃

@@ -9,7 +9,7 @@ design:
   spacing: "6rem"
 
 sections:
-  - block: resume-biography # to show intrest and education change to resume-biography-3
+  - block: resume-biography-3 # to show intrest and education change to resume-biography-3
     content:
       # Choose a user profile to display (a folder name within `content/authors/`)
       username: admin
@@ -18,42 +18,42 @@ sections:
       button:
         text: Download Resume
         url: uploads/resume.pdf
-    design:
-      css_class: dark
-      background:
-        color: black
-        image:
-          # Add your image background to `assets/media/`.
-          filename: new_bg.png
-          filters:
-            brightness: 0.6
-          size: cover
-          position: center
-          parallax: true
+    # design:
+    #   css_class: dark
+    #   background:
+    #     color: black
+        # image:
+        #   # Add your image background to `assets/media/`.
+        #   filename: new_bg.png
+        #   filters:
+        #     brightness: 0.6
+        #   size: cover
+        #   position: center
+        #   parallax: true
   # - block: resume-skills
   #   content:
   #     title: Skills & Hobbies
   #     # Note: `username` refers to the user's folder name in `content/authors/`
   #     username: admin
-  - block: markdown
-    content:
-      title: '📚 My Mission'
-      subtitle: ''
-      text: |-
-        I'm a computer science engineer with a passion for **data science** and **AI**. I am also an enthusiatic coder profient in **Python** and **SQL**. I blog about data science, machine learning, deep learning techniques and business cases.
+  # - block: markdown
+  #   content:
+  #     title: '📚 My Mission'
+  #     subtitle: ''
+  #     text: |-
+  #       I'm a computer science engineer with a passion for **data science** and **AI**. I am also an enthusiatic coder profient in **Python** and **SQL**. I blog about data science, machine learning, deep learning techniques and business cases.
 
-        I am dedicated to harnessing the power of data to uncover insights, drive innovation, and solve complex business problems. I apply a range of **data visualization** and **statistical analysis** techniques to interpret data, and use **machine learning algorithms** to extract meaningful patterns in data that can address business problems. I am committed to continuous learning and staying at the forefront of technological advancements to tackle real-world challenges.
+  #       I am dedicated to harnessing the power of data to uncover insights, drive innovation, and solve complex business problems. I apply a range of **data visualization** and **statistical analysis** techniques to interpret data, and use **machine learning algorithms** to extract meaningful patterns in data that can address business problems. I am committed to continuous learning and staying at the forefront of technological advancements to tackle real-world challenges.
    
-        Please reach out to collaborate 😃
-      button:
-          text: Get Started
-          url: https://hugoblox.com/templates/
-    design:
-      columns: '1'
-      card:
-        # Card background color (CSS class)
-        css_class: "bg-primary-500"
-        css_style: ""
+  #       Please reach out to collaborate 😃
+  #     button:
+  #         text: Get Started
+  #         url: https://hugoblox.com/templates/
+  #   design:
+  #     columns: '1'
+  #     card:
+  #       # Card background color (CSS class)
+  #       css_class: "bg-primary-500"
+  #       css_style: ""
   - block: cta-button-list
     content:
       # Need a custom icon?
