@@ -5,12 +5,20 @@
     <link>http://localhost:1313/post/</link>
       <atom:link href="http://localhost:1313/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Thu, 18 Jul 2024 00:00:00 +0000</lastBuildDate>
+    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Sat, 20 Jul 2024 00:00:00 +0000</lastBuildDate>
     <image>
       <url>http://localhost:1313/media/icon_hu68170e94a17a2a43d6dcb45cf0e8e589_3079_512x512_fill_lanczos_center_3.png</url>
       <title>Posts</title>
       <link>http://localhost:1313/post/</link>
     </image>
+    
+    <item>
+      <title>Text Summarization with Transformers</title>
+      <link>http://localhost:1313/post/transformers_text_summarization/</link>
+      <pubDate>Sat, 20 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/transformers_text_summarization/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Data Preprocessing Techniques</title>
@@ -57,11 +65,11 @@
 &lt;li&gt;&lt;mark&gt;Sklearn&lt;/mark&gt; provides a rich set of transformers for data pre-processing.&lt;/li&gt;
 &lt;li&gt;Sklearn provides &lt;mark&gt;pipeline&lt;/mark&gt; to chain multiple transforms together and apply them uniformly &lt;em&gt;&lt;strong&gt;across train, eval and test sets&lt;/strong&gt;&lt;/em&gt;.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;flex px-4 py-3 mb-6 rounded-md bg-primary-100 dark:bg-primary-900&#34;&gt;
-&lt;span class=&#34;pr-3 pt-1 text-primary-600 dark:text-primary-300&#34;&gt;
-  &lt;svg height=&#34;24&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; viewBox=&#34;0 0 24 24&#34;&gt;&lt;path fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; stroke-width=&#34;1.5&#34; d=&#34;m11.25 11.25l.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0m-9-3.75h.008v.008H12z&#34;/&gt;&lt;/svg&gt;
+&lt;div class=&#34;flex px-4 py-3 mb-6 rounded-md bg-yellow-100 dark:bg-yellow-900&#34;&gt;
+&lt;span class=&#34;pr-3 pt-1 text-red-400&#34;&gt;
+  &lt;svg height=&#34;24&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; viewBox=&#34;0 0 24 24&#34;&gt;&lt;path fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; stroke-width=&#34;1.5&#34; d=&#34;M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0zM12 15.75h.007v.008H12z&#34;/&gt;&lt;/svg&gt;
 &lt;/span&gt;
-  &lt;span class=&#34;dark:text-neutral-300&#34;&gt;The same pre-processing technique should be applied to both the training and test set.&lt;/span&gt;
+  &lt;span class=&#34;dark:text-neutral-300&#34;&gt;The &lt;strong&gt;same pre-processing technique&lt;/strong&gt; should be applied to both the training and test set.&lt;/span&gt;
 &lt;/div&gt;
 &lt;h3 id=&#34;sklearn-transformers&#34;&gt;Sklearn Transformers&lt;/h3&gt;
 &lt;p&gt;Sklearn provide the following &lt;em&gt;&lt;strong&gt;library of transformers&lt;/strong&gt;&lt;/em&gt; for &lt;strong&gt;data preprocessing&lt;/strong&gt;.&lt;/p&gt;
@@ -170,6 +178,12 @@ Transforms the original feature vector $x$ into a new feature vector $x&#39;$ us
 $$
 x&#39; = \frac{x - \mu}{\sigma}
 $$
+&lt;div class=&#34;flex px-4 py-3 mb-6 rounded-md bg-primary-100 dark:bg-primary-900&#34;&gt;
+&lt;span class=&#34;pr-3 pt-1 text-primary-600 dark:text-primary-300&#34;&gt;
+  &lt;svg height=&#34;24&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; viewBox=&#34;0 0 24 24&#34;&gt;&lt;path fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; stroke-width=&#34;1.5&#34; d=&#34;m11.25 11.25l.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0m-9-3.75h.008v.008H12z&#34;/&gt;&lt;/svg&gt;
+&lt;/span&gt;
+  &lt;span class=&#34;dark:text-neutral-300&#34;&gt;This procedure is also called as &lt;em&gt;&lt;strong&gt;standardization&lt;/strong&gt;&lt;/em&gt;.&lt;/span&gt;
+&lt;/div&gt;
 &lt;p&gt;Example usage:
 Consider original feature matrix $\mathbf{X}$
 &lt;/p&gt;
@@ -210,8 +224,14 @@ $$
 x&#39; = \frac{x - x.min}{x.max - x.min}
 $$
 &lt;p&gt;
-where $x.min$ and $x.max$ are smallest and largest values of that feature respectively, of the original feature vector $x$.
-Example usage:
+where $x.min$ and $x.max$ are smallest and largest values of that feature respectively, of the original feature vector $x$.&lt;/p&gt;
+&lt;div class=&#34;flex px-4 py-3 mb-6 rounded-md bg-primary-100 dark:bg-primary-900&#34;&gt;
+&lt;span class=&#34;pr-3 pt-1 text-primary-600 dark:text-primary-300&#34;&gt;
+  &lt;svg height=&#34;24&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; viewBox=&#34;0 0 24 24&#34;&gt;&lt;path fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; stroke-width=&#34;1.5&#34; d=&#34;m11.25 11.25l.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0m-9-3.75h.008v.008H12z&#34;/&gt;&lt;/svg&gt;
+&lt;/span&gt;
+  &lt;span class=&#34;dark:text-neutral-300&#34;&gt;This procedure is also called as &lt;em&gt;&lt;strong&gt;normalization&lt;/strong&gt;&lt;/em&gt;.&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;Example usage:
 Consider original feature matrix $\mathbf{X}$
 &lt;/p&gt;
 $$

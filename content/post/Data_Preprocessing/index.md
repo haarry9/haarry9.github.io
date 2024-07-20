@@ -35,8 +35,8 @@ Some of the typical problems that require pre-processing are:
  - <mark>Sklearn</mark> provides a rich set of transformers for data pre-processing.
  - Sklearn provides <mark>pipeline</mark> to chain multiple transforms together and apply them uniformly ***across train, eval and test sets***.
 
-{{% callout note %}}
-The same pre-processing technique should be applied to both the training and test set. 
+{{% callout warning %}}
+The **same pre-processing technique** should be applied to both the training and test set. 
 {{% /callout %}}
 
 ### Sklearn Transformers
@@ -150,6 +150,11 @@ $$
 x' = \frac{x - \mu}{\sigma}
 $$
 
+{{% callout note %}}
+This procedure is also called as ***standardization***.
+{{% /callout %}}
+
+
 Example usage:
 Consider original feature matrix $\mathbf{X}$ 
 $$
@@ -190,6 +195,11 @@ $$
 x' = \frac{x - x.min}{x.max - x.min}
 $$
 where $x.min$ and $x.max$ are smallest and largest values of that feature respectively, of the original feature vector $x$.
+
+{{% callout note %}}
+This procedure is also called as ***normalization***.
+{{% /callout %}}
+
 Example usage:
 Consider original feature matrix $\mathbf{X}$ 
 $$

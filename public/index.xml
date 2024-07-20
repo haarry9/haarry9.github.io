@@ -34,6 +34,77 @@
     </item>
     
     <item>
+      <title>Text Summarization with Transformers</title>
+      <link>http://localhost:1313/post/transformers_text_summarization/</link>
+      <pubDate>Sat, 20 Jul 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/post/transformers_text_summarization/</guid>
+      <description>
+
+
+&lt;details class=&#34;print:hidden xl:hidden&#34; open&gt;
+  &lt;summary&gt;Table of Contents&lt;/summary&gt;
+  &lt;div class=&#34;text-sm&#34;&gt;
+  &lt;nav id=&#34;TableOfContents&#34;&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href=&#34;#introduction&#34;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#machine-learning-for-text-summarization&#34;&gt;Machine Learning for Text Summarization&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#what-is-a-transformer&#34;&gt;What is a Transformer?&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#bert-and-gpt-models&#34;&gt;BERT and GPT models&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#bart--bert-like-encoder-and-gpt-like-decoder&#34;&gt;BART = BERT-like encoder and GPT-like decoder&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&#34;#references&#34;&gt;References&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;
+  &lt;/div&gt;
+&lt;/details&gt;
+
+&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Natural Language Processing is one of the key areas where Machine Learning has been very effective. In fact, whereas NLP traditionally required a lot of human intervention, today, this is no longer true. Specifically Deep Learning technology can be used for learning tasks related to language, such as translation, classification, entity recognition or in this case, summarization.&lt;/p&gt;
+&lt;p&gt;We discuss the following in the article:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Understand what a Transformer is at a high level.&lt;/li&gt;
+&lt;li&gt;See how BERT and GPT can be composed to form the BART Transformer.&lt;/li&gt;
+&lt;li&gt;Create a Text Summarization pipeline that really works on all of your English texts!&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;machine-learning-for-text-summarization&#34;&gt;Machine Learning for Text Summarization&lt;/h2&gt;
+&lt;p&gt;Human beings have limited cognitive capacity for performing certain texts. Today, many people aren&amp;rsquo;t fond of reading large amounts of text anymore. For this reason, summarizing texts is quite important: when studying for exams, reading self-help books, or simply reading the news, today&amp;rsquo;s world is becoming so accelerated that time is of the absolute essence.&lt;/p&gt;
+&lt;h2 id=&#34;what-is-a-transformer&#34;&gt;What is a Transformer?&lt;/h2&gt;
+&lt;!-- &lt;figure&gt;&lt;img src=&#34;http://localhost:1313/post/transformers_text_summarization/transformer.png&#34;
+    alt=&#34;Transformer&#34;&gt;&lt;figcaption&gt;
+      &lt;p&gt;Source: Vaswani et al. (2017)&lt;/p&gt;
+    &lt;/figcaption&gt;
+&lt;/figure&gt;
+ --&gt;
+&lt;p&gt;In &lt;strong&gt;Natural Language Processing&lt;/strong&gt;, the state-of-the-art in Machine Learning today involves a wide variety of Transformer-based models.&lt;/p&gt;
+&lt;p&gt;A Transformer is a machine learning architecture that combines an &lt;em&gt;&lt;strong&gt;encoder&lt;/strong&gt;&lt;/em&gt; with a &lt;em&gt;&lt;strong&gt;decoder&lt;/strong&gt;&lt;/em&gt; and jointly learns them, allowing us to convert input sequences (e.g. phrases) into some intermediate format before we convert it back into human-understandable format.
+They have become the primary choice for ML driven language tasks these days because they can apply self-attention and are parallel in nature. Previous approaches liken RNN, LSTM, couldn&amp;rsquo;t do this: they either suffered from long-term memory loss or experienced significant compute bottlenecks. Transformers don&amp;rsquo;t, and in fact, we can train them on datasets with unprecedented scale (Dosovitskiy et al., 2020).&lt;/p&gt;
+&lt;h2 id=&#34;bert-and-gpt-models&#34;&gt;BERT and GPT models&lt;/h2&gt;
+&lt;p&gt;Since the introduction of Transformers by Vaswani et al. (2017), many improvements have been suggested. Two of these improvements are BERT and GPT:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The &lt;strong&gt;Bidirectional Encoder Representations from Transformers (BERT)&lt;/strong&gt; by Devlin et al. (2018) takes the encoder segment from the classic (or vanilla) Transformer, slightly changes how the inputs are generated (by means of WordPiece rather than learned embeddings) and changes the learning task into a Masked Language Model (MLM) plus Next Sentence Prediction (NSP) rather than training a simple language model. They also follow the argument for pretraining and subsequent fine-tuning: by taking the encoder segment only, pretraining it on massive datasets, BERT can be used as the encoder for subsequent finetuning tasks. In other words, we can easily build on top of BERT and use it as the root for training our own models with significantly smaller language datasets.
+&lt;ul&gt;
+&lt;li&gt;Since BERT utilizes the encoder segment from the vanilla Transformer only, it is really good at understanding natural language, but less good at generating text.&lt;/li&gt;
+&lt;li&gt;BERT&amp;rsquo;s differences ensure that it does not only look at text in a left-to-right fashion, which is common in especially the masked segments of vanilla Transformers. Rather, it is bidirectional, which means that it can both look at text in a left-to-right and right-to-left fashion.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;The &lt;strong&gt;Generative Pre-Training GPT&lt;/strong&gt; model series were invented by OpenAI and take the decoder segment of vanilla Transformers (Radford et al., 2018). It is therefore really good at generating text.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;bart--bert-like-encoder-and-gpt-like-decoder&#34;&gt;BART = BERT-like encoder and GPT-like decoder&lt;/h2&gt;
+&lt;p&gt;Above, we saw that a pretrained BERT model is really good at understanding language (and hence understanding input text) but less adequate at generating new text. In other words, while it can understand questions really well (see Google, &lt;a href=&#34;https://blog.google/products/search/search-language-understanding-bert/&#34;&gt;which is utilizing BERT for many search queries these days&lt;/a&gt;), it&amp;rsquo;s not the primary choice for generating the answers.&lt;/p&gt;
+&lt;p&gt;This is where BART comes in, which stands for &lt;strong&gt;Bidirectional and Auto-Regressive Transformers&lt;/strong&gt; (Lewis et al., 2019). It essentially generalizes BERT and GPT based architectures by using the standard Seq2Seq Transformer architecture from Vaswani et al. (2017) while mimicing BERT/GPT functionality and training objectives. For example, pretraining BART involves &lt;em&gt;&lt;strong&gt;token masking (like BERT does), token deletion, text infilling, sentence permutation and document rotation.&lt;/strong&gt;&lt;/em&gt; Once the pretrained BART model has finished training, it can be fine-tuned to a more specific task, such as text summarization.&lt;/p&gt;
+&lt;p&gt;In the schema below, we visualize what BART looks like at a high level. First of all, you can see that input texts are passed through the bidirectional encoder, i.e. the BERT-like encoder. By consequence, texts are looked at from left-to-right and right-to-left, and the subsequent output is used in the autoregressive decoder, which predicts the output based on the encoder input and the output tokens predicted so far. In other words, with BART, we can now both understand the inputs really well and generate new outputs.&lt;/p&gt;
+&lt;p&gt;That is, we can e.g. finetune a model for a text summarization task.&lt;/p&gt;
+&lt;figure&gt;&lt;img src=&#34;http://localhost:1313/post/transformers_text_summarization/BART.jpg&#34;
+    alt=&#34;Transformer&#34;&gt;
+&lt;/figure&gt;
+
+&lt;hr&gt;
+&lt;h2 id=&#34;references&#34;&gt;References&lt;/h2&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/christianversloot/machine-learning-articles/blob/main/easy-text-summarization-with-huggingface-transformers-and-machine-learning.md&#34;&gt;https://github.com/christianversloot/machine-learning-articles/blob/main/easy-text-summarization-with-huggingface-transformers-and-machine-learning.md&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., &amp;hellip; &amp;amp; Polosukhin, I. (2017). &lt;a href=&#34;https://arxiv.org/abs/1706.03762&#34;&gt;Attention is all you need&lt;/a&gt;. Advances in neural information processing systems, 30, 5998-6008.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Data Preprocessing Techniques</title>
       <link>http://localhost:1313/post/data_preprocessing/</link>
       <pubDate>Thu, 18 Jul 2024 00:00:00 +0000</pubDate>
@@ -78,11 +149,11 @@
 &lt;li&gt;&lt;mark&gt;Sklearn&lt;/mark&gt; provides a rich set of transformers for data pre-processing.&lt;/li&gt;
 &lt;li&gt;Sklearn provides &lt;mark&gt;pipeline&lt;/mark&gt; to chain multiple transforms together and apply them uniformly &lt;em&gt;&lt;strong&gt;across train, eval and test sets&lt;/strong&gt;&lt;/em&gt;.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div class=&#34;flex px-4 py-3 mb-6 rounded-md bg-primary-100 dark:bg-primary-900&#34;&gt;
-&lt;span class=&#34;pr-3 pt-1 text-primary-600 dark:text-primary-300&#34;&gt;
-  &lt;svg height=&#34;24&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; viewBox=&#34;0 0 24 24&#34;&gt;&lt;path fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; stroke-width=&#34;1.5&#34; d=&#34;m11.25 11.25l.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0m-9-3.75h.008v.008H12z&#34;/&gt;&lt;/svg&gt;
+&lt;div class=&#34;flex px-4 py-3 mb-6 rounded-md bg-yellow-100 dark:bg-yellow-900&#34;&gt;
+&lt;span class=&#34;pr-3 pt-1 text-red-400&#34;&gt;
+  &lt;svg height=&#34;24&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; viewBox=&#34;0 0 24 24&#34;&gt;&lt;path fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; stroke-width=&#34;1.5&#34; d=&#34;M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0zM12 15.75h.007v.008H12z&#34;/&gt;&lt;/svg&gt;
 &lt;/span&gt;
-  &lt;span class=&#34;dark:text-neutral-300&#34;&gt;The same pre-processing technique should be applied to both the training and test set.&lt;/span&gt;
+  &lt;span class=&#34;dark:text-neutral-300&#34;&gt;The &lt;strong&gt;same pre-processing technique&lt;/strong&gt; should be applied to both the training and test set.&lt;/span&gt;
 &lt;/div&gt;
 &lt;h3 id=&#34;sklearn-transformers&#34;&gt;Sklearn Transformers&lt;/h3&gt;
 &lt;p&gt;Sklearn provide the following &lt;em&gt;&lt;strong&gt;library of transformers&lt;/strong&gt;&lt;/em&gt; for &lt;strong&gt;data preprocessing&lt;/strong&gt;.&lt;/p&gt;
@@ -191,6 +262,12 @@ Transforms the original feature vector $x$ into a new feature vector $x&#39;$ us
 $$
 x&#39; = \frac{x - \mu}{\sigma}
 $$
+&lt;div class=&#34;flex px-4 py-3 mb-6 rounded-md bg-primary-100 dark:bg-primary-900&#34;&gt;
+&lt;span class=&#34;pr-3 pt-1 text-primary-600 dark:text-primary-300&#34;&gt;
+  &lt;svg height=&#34;24&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; viewBox=&#34;0 0 24 24&#34;&gt;&lt;path fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; stroke-width=&#34;1.5&#34; d=&#34;m11.25 11.25l.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0m-9-3.75h.008v.008H12z&#34;/&gt;&lt;/svg&gt;
+&lt;/span&gt;
+  &lt;span class=&#34;dark:text-neutral-300&#34;&gt;This procedure is also called as &lt;em&gt;&lt;strong&gt;standardization&lt;/strong&gt;&lt;/em&gt;.&lt;/span&gt;
+&lt;/div&gt;
 &lt;p&gt;Example usage:
 Consider original feature matrix $\mathbf{X}$
 &lt;/p&gt;
@@ -231,8 +308,14 @@ $$
 x&#39; = \frac{x - x.min}{x.max - x.min}
 $$
 &lt;p&gt;
-where $x.min$ and $x.max$ are smallest and largest values of that feature respectively, of the original feature vector $x$.
-Example usage:
+where $x.min$ and $x.max$ are smallest and largest values of that feature respectively, of the original feature vector $x$.&lt;/p&gt;
+&lt;div class=&#34;flex px-4 py-3 mb-6 rounded-md bg-primary-100 dark:bg-primary-900&#34;&gt;
+&lt;span class=&#34;pr-3 pt-1 text-primary-600 dark:text-primary-300&#34;&gt;
+  &lt;svg height=&#34;24&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; viewBox=&#34;0 0 24 24&#34;&gt;&lt;path fill=&#34;none&#34; stroke=&#34;currentColor&#34; stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; stroke-width=&#34;1.5&#34; d=&#34;m11.25 11.25l.041-.02a.75.75 0 0 1 1.063.852l-.708 2.836a.75.75 0 0 0 1.063.853l.041-.021M21 12a9 9 0 1 1-18 0a9 9 0 0 1 18 0m-9-3.75h.008v.008H12z&#34;/&gt;&lt;/svg&gt;
+&lt;/span&gt;
+  &lt;span class=&#34;dark:text-neutral-300&#34;&gt;This procedure is also called as &lt;em&gt;&lt;strong&gt;normalization&lt;/strong&gt;&lt;/em&gt;.&lt;/span&gt;
+&lt;/div&gt;
+&lt;p&gt;Example usage:
 Consider original feature matrix $\mathbf{X}$
 &lt;/p&gt;
 $$
